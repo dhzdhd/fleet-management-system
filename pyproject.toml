@@ -6,7 +6,9 @@ authors = ["dhzdhd"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.12"
+oracledb = "^1.2.2"
+pyside6 = "^6.4.2"
 
 
 [build-system]
