@@ -11,6 +11,9 @@ oracledb = "^1.2.2"
 pyside6 = "^6.4.2"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
