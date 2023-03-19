@@ -28,7 +28,15 @@ ApplicationWindow {
                 text: "hello"
                 height: 50
             }
+            Components.Button {
+                height: 50
+                type: "primary"
+                text: "Submit"
+            }
+            Components.Button {
+                height: 50
+                text: "Cancel"
+            }
         }
-        // Component.Button {}
     }
 }
