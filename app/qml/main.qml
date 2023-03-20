@@ -10,32 +10,82 @@ ApplicationWindow {
 
 
     Rectangle {
-        id: container
+        id: mainContainer
         anchors.fill: parent
         color: '#ff282a37'
 
         Column {
             anchors.fill: parent
-            spacing: 20
+            Rectangle {
+                id: topContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: parent.height * 2 / 3
+                color: "transparent"
 
-            Components.TextField {
-                id: b
-                text: "hi"
-                height: 50
+                Column {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    spacing: 20
+
+                    Text {
+                        text: "Fleet Management"
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                        color: "white"
+                        font {
+                            pixelSize: 32
+                        }
+                    }
+
+                    Components.TextField {
+                        id: usernameField
+                        text: "Username"
+                        height: 50
+                    }
+                    Components.TextField {
+                        id: passwordField
+                        text: "Password"
+                        height: 50
+                    }
+                }
             }
-            Components.TextField {
-                id: c
-                text: "hello"
-                height: 50
-            }
-            Components.Button {
-                height: 50
-                type: "primary"
-                text: "Submit"
-            }
-            Components.Button {
-                height: 50
-                text: "Cancel"
+
+            Rectangle {
+                id: bottomContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: parent.height / 3
+                color: "transparent"
+
+                Column {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    spacing: 20
+
+                    Components.Button {
+                        id: submitButton
+                        height: 50
+                        type: "primary"
+                        text: "Submit"
+                    }
+                    Components.Button {
+                        id: cancelButton
+                        height: 50
+                        text: "Cancel"
+                    }
+                }
             }
         }
     }
