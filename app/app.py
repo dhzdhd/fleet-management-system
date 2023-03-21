@@ -10,7 +10,6 @@ from pathlib import Path
 def setup():
     app = QGuiApplication(sys.argv)
 
-    bridge = i.Bridge()
     db = d.Database()
     db.execute()
     db.close()
@@ -18,6 +17,8 @@ def setup():
     engine = QQmlApplicationEngine()
     engine.quit.connect(app.quit)
     engine.load(Path(__file__).parent / "qml/main.qml")
+
+    bridge = i.Bridge()
 
     engine.rootObjects()[0].setProperty("interbridge", bridge)
 

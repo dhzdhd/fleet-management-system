@@ -64,7 +64,11 @@ Item {
 
                     isPrimary: true
                     text: "Submit"
-                    onClicked: bridge.sayHello("fer")
+                    onClicked: {
+                        bridge.sayHello("fer")
+                        stack.pop()
+                        stack.push(pushId)
+                    }
                 }
                 Components.Button {
                     id: cancelButton
@@ -75,9 +79,7 @@ Item {
 
                     text: "Cancel"
                     onClicked: {
-                        bridge.sayHello("fer")
-                        stack.pop()
-                        stack.push(pushId)
+                        bridge.quit()
                     }
                 }
             }
