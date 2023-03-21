@@ -23,12 +23,11 @@ ApplicationWindow {
     StackView {
         id: stack
         anchors.fill: parent
-        initialItem: Views.Login {
-            bridge: interbridge
-        }
+        initialItem: login
     }
 
-    // Views.Login {
-
-    // }
+    Views.Login {
+        id: login
+        bridge: interbridge
+    }
 }
