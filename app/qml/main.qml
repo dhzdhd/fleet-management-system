@@ -9,6 +9,16 @@ ApplicationWindow {
     height: 500
     title: "Fleet Management System"
 
+    property QtObject bridge
+
+    Connections {
+        target: bridge
+
+        function onUpdated(msg) {
+            console.log(msg)
+        }
+    }
+
     Rectangle {
         id: mainContainer
         anchors.fill: parent
@@ -64,6 +74,7 @@ ApplicationWindow {
 
                     isPrimary: true
                     text: "Submit"
+                    onClicked: bridge.sayHello("fer")
                 }
                 Components.Button {
                     id: cancelButton
@@ -73,6 +84,7 @@ ApplicationWindow {
                     Layout.rightMargin: 10
 
                     text: "Cancel"
+                    onClicked: bridge.sayHello("fer")
                 }
             }
 

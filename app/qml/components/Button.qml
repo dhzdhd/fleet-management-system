@@ -4,6 +4,7 @@ import QtQuick.Controls.Basic
 Item {
     property bool isPrimary: false
     property alias text: btn.text
+    signal clicked
 
     id: item
 
@@ -27,6 +28,8 @@ Item {
             pointSize: 16
             weight: Font.DemiBold
         }
+
+        onClicked: item.clicked()
 
         background: Rectangle {
             anchors.fill: parent
