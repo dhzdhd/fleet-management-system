@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import "components" as Components
 
 ApplicationWindow {
@@ -8,85 +9,73 @@ ApplicationWindow {
     height: 500
     title: "Fleet Management System"
 
-
     Rectangle {
         id: mainContainer
         anchors.fill: parent
         color: '#ff282a37'
 
-        Column {
+        GridLayout {
             anchors.fill: parent
-            Rectangle {
+            rows: 3
+            columns: 1
+
+            ColumnLayout {
                 id: topContainer
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                Layout.rowSpan: 2
                 height: parent.height * 2 / 3
-                color: "transparent"
+                spacing: 10
 
-                Column {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
+                Text {
+                    text: "Fleet Management"
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.bottomMargin: 20
+                    color: "white"
+                    font {
+                        pixelSize: 32
                     }
-                    spacing: 20
+                }
 
-                    Text {
-                        text: "Fleet Management"
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                        }
-                        color: "white"
-                        font {
-                            pixelSize: 32
-                        }
-                    }
-
-                    Components.TextField {
-                        id: usernameField
-                        text: "Username"
-                        height: 50
-                    }
-                    Components.TextField {
-                        id: passwordField
-                        text: "Password"
-                        height: 50
-                    }
+                Components.TextEdit {
+                    id: usernameField
+                    Layout.fillWidth: true
+                    placeholderText: "Username"
+                }
+                Components.TextEdit {
+                    id: passwordField
+                    Layout.fillWidth: true
+                    placeholderText: "Password"
+                    isPassword: true
                 }
             }
 
-            Rectangle {
+            ColumnLayout {
                 id: bottomContainer
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                Layout.rowSpan: 1
                 height: parent.height / 3
-                color: "transparent"
+                spacing: 20
 
-                Column {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                    }
-                    spacing: 20
+                Components.Button {
+                    id: submitButton
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 10
+                    Layout.rightMargin: 10
 
-                    Components.Button {
-                        id: submitButton
-                        height: 50
-                        type: "primary"
-                        text: "Submit"
-                    }
-                    Components.Button {
-                        id: cancelButton
-                        height: 50
-                        text: "Cancel"
-                    }
+                    isPrimary: true
+                    text: "Submit"
+                }
+                Components.Button {
+                    id: cancelButton
+
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 10
+                    Layout.rightMargin: 10
+
+                    text: "Cancel"
                 }
             }
+
         }
     }
 }

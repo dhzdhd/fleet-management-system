@@ -6,7 +6,7 @@ class Database:
         # Run lsnrctl status to get values
         self.conn: odb.Connection = odb.connect(
             user="system",
-            password="",
+            password="lolxd5",
             port=1521,
             host="localhost",
             service_name="deep",
