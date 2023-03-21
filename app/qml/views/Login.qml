@@ -6,8 +6,8 @@ import "../components" as Components
 Item {
     id: login
     property QtObject bridge
-
-    anchors.fill: parent
+    property var pushId
+    property var stack
 
     Rectangle {
         id: mainContainer
@@ -74,7 +74,11 @@ Item {
                     Layout.rightMargin: 10
 
                     text: "Cancel"
-                    onClicked: bridge.sayHello("fer")
+                    onClicked: {
+                        bridge.sayHello("fer")
+                        stack.pop()
+                        stack.push(pushId)
+                    }
                 }
             }
         }

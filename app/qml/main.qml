@@ -29,5 +29,12 @@ ApplicationWindow {
     Views.Login {
         id: login
         bridge: interbridge
+        pushId: table
+        stack: stack
+    }
+
+    Views.Table {
+        id: table
+        bridge: interbridge
     }
 }
