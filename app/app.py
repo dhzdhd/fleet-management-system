@@ -19,6 +19,6 @@ def setup():
     engine.quit.connect(app.quit)
     engine.load(Path(__file__).parent / "qml/main.qml")
 
-    engine.rootObjects()[0].setProperty("bridge", bridge)
+    engine.rootObjects()[0].setProperty("interbridge", bridge)
 
     sys.exit(app.exec())
