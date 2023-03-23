@@ -12,14 +12,16 @@ def setup():
 
     db = d.Database()
     db.execute()
-    db.close()
 
     engine = QQmlApplicationEngine()
     engine.quit.connect(app.quit)
     engine.load(Path(__file__).parent / "qml/main.qml")
 
-    bridge = i.Bridge()
+    table = i.TableModel(db, None)
+    bridge = i.Bridge(table)
 
-    engine.rootObjects()[0].setProperty("interbridge", bridge)
+    engine.rootObjects()[0].setProperty("bridge", bridge)
+    engine.rootContext().setContextProperty("tableModel", table)
+    # engine.rootObjects()[0].setProperty("tableModel", table)
 
     sys.exit(app.exec())

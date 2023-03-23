@@ -11,10 +11,10 @@ Item {
     implicitHeight: 50
     implicitWidth: 50
 
-    anchors {
-        leftMargin: 20
-        rightMargin: 20
-    }
+    // anchors {
+    //     leftMargin: 20
+    //     rightMargin: 20
+    // }
 
     Button {
         id: btn

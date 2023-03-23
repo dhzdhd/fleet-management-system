@@ -15,12 +15,20 @@ class Database:
     def close(self) -> None:
         self.conn.close()
 
+    def fetch(self) -> list:
+        with self.conn.cursor() as cursor:
+            return cursor.execute("SELECT * FROM emp").fetchall()
+
+    def fetchOther(self) -> list:
+        with self.conn.cursor() as cursor:
+            return cursor.execute("SELECT * FROM client").fetchall()
+
     def execute(self) -> None:
         with self.conn.cursor() as cursor:
-            cursor.execute("CREATE TABLE a(b NUMBER)")
+            # cursor.execute("CREATE TABLE a(b NUMBER)")
             cursor.execute("INSERT INTO a VALUES(:1)", (1,))
 
             for row in cursor.execute("SELECT * FROM a"):
                 print(row)
 
-            cursor.execute("DROP TABLE a")
+            # cursor.execute("DROP TABLE a")

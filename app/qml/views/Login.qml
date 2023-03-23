@@ -5,9 +5,8 @@ import "../components" as Components
 
 Item {
     id: login
-    property QtObject bridge
     property var pushId
-    property var stack
+    property var stackRef
 
     Rectangle {
         id: mainContainer
@@ -65,9 +64,8 @@ Item {
                     isPrimary: true
                     text: "Submit"
                     onClicked: {
-                        bridge.sayHello("fer")
-                        stack.pop()
-                        stack.push(pushId)
+                        stackRef.pop()
+                        stackRef.push(pushId)
                     }
                 }
                 Components.Button {
@@ -77,7 +75,7 @@ Item {
                     Layout.leftMargin: 10
                     Layout.rightMargin: 10
 
-                    text: "Cancel"
+                    text: "Exit"
                     onClicked: {
                         bridge.quit()
                     }

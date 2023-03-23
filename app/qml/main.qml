@@ -10,10 +10,10 @@ ApplicationWindow {
     height: 500
     title: "Fleet Management System"
 
-    property QtObject interbridge
+    property QtObject bridge
 
     Connections {
-        target: interbridge
+        target: bridge
 
         function onUpdated(msg) {
             console.log(msg)
@@ -26,15 +26,13 @@ ApplicationWindow {
         initialItem: login
     }
 
-    Views.Login {
-        id: login
-        bridge: interbridge
-        pushId: table
-        stack: stack
-    }
-
     Views.Table {
         id: table
-        bridge: interbridge
+    }
+
+    Views.Login {
+        id: login
+        pushId: table
+        stackRef: stack
     }
 }
