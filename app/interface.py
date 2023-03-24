@@ -27,10 +27,10 @@ class TableModel(QAbstractTableModel):
             return self._data[index.row()][index.column()]
         return 0
 
-    def rowCount(self, parent: QModelIndex | QPersistentModelIndex) -> int:
+    def rowCount(self, parent: QModelIndex | QPersistentModelIndex = None) -> int:
         return len(self._data)
 
-    def columnCount(self, parent: QModelIndex | QPersistentModelIndex) -> int:
+    def columnCount(self, parent: QModelIndex | QPersistentModelIndex = None) -> int:
         return len(self._data[0])
 
     def insertRows(

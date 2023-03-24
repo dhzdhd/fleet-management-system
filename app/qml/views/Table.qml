@@ -37,66 +37,70 @@ Item {
                 }
             }
 
-            TableView {
-                id: tableview
-                height: table.height
-                width: table.width
-                clip: true
-                columnSpacing: 0
-                rowSpacing: 0
-
+            RowLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignBottom
 
-                ScrollIndicator.horizontal: ScrollIndicator { }
-                ScrollIndicator.vertical: ScrollIndicator { }
-
-                // model: TableModel {
-                //     TableModelColumn { display: "name" }
-
-                //     rows: [
-                //         {
-                //             name: "a"
-                //         }
-                //     ]
-                // }
-
-                model: tableModel
-
-                selectionModel: ItemSelectionModel {}
-
-                delegate: Rectangle {
-                    implicitWidth: 150
-                    implicitHeight: 70
+                TableView {
+                    id: tableview
+                    height: table.height
+                    width: table.width
                     clip: true
+                    columnSpacing: 0
+                    rowSpacing: 0
 
-                    required property bool selected
-                    required property bool current
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.alignment: Qt.AlignRight
 
-                    color: current ? Universal.color(Universal.Cobalt): "black"
+                    ScrollIndicator.horizontal: ScrollIndicator { }
+                    ScrollIndicator.vertical: ScrollIndicator { }
 
-                    border {
-                        width: 1
-                        color: Universal.color(Universal.Cobalt)
-                    }
+                    // model: TableModel {
+                    //     TableModelColumn { display: "name" }
 
-                    RowLayout {
-                        anchors.fill: parent
-                        Text {
-                            id: text
-                            // Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                            Layout.fillHeight: true
-                            Layout.fillWidth: true
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
+                    //     rows: [
+                    //         {
+                    //             name: "a"
+                    //         }
+                    //     ]
+                    // }
 
-                            font {
-                                pixelSize: 16
+                    model: tableModel
+
+                    selectionModel: ItemSelectionModel {}
+
+                    delegate: Rectangle {
+                        implicitWidth: 150
+                        implicitHeight: 70
+
+                        required property bool selected
+                        required property bool current
+
+                        color: current ? Universal.color(Universal.Cobalt): "black"
+
+                        border {
+                            width: 1
+                            color: Universal.color(Universal.Cobalt)
+                        }
+
+                        RowLayout {
+                            anchors.fill: parent
+
+                            Text {
+                                id: text
+                                Layout.fillWidth: true
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+
+                                font {
+                                    pixelSize: 16
+                                }
+
+                                color: "white"
+                                text: display
                             }
-
-                            color: "white"
-                            text: display
                         }
                     }
                 }
