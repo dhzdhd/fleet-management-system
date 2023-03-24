@@ -20,14 +20,11 @@ Item {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
 
-                Rectangle {
-                    height: 70
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Components.Button {
-                        text: "Hello"
-                        width: 200
-                        height: 70
+                ComboBox {
+                    Layout.fillWidth: true
+                    model: ["emp", "client", "work_exp", "prj_details", "emp_skill"]
+                    onActivated: (index) => {
+                        bridge.setTable(textAt(index))
                     }
                 }
             }

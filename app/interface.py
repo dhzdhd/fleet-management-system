@@ -7,7 +7,7 @@ from . import database as d
 class TableModel(QAbstractTableModel):
     def __init__(self, db: d.Database, parent: QObject | None = None) -> None:
         super().__init__(parent=parent)
-        self._data = db.fetch()
+        self._data = db.fetch("emp")
         self._db = db
 
     def headerData(
@@ -41,9 +41,9 @@ class TableModel(QAbstractTableModel):
         super().endInsertRows()
         return super().insertRows(row, count, parent)
 
-    def setData(self):
+    def setTable(self, table: str):
         self.beginResetModel()
-        self._data = self._db.fetchOther()
+        self._data = self._db.fetch(table)
         self.endResetModel()
 
 
@@ -54,9 +54,9 @@ class Bridge(QObject):
 
     updated = Signal(str, arguments=["val"])
 
-    @Slot(None, result=None)
-    def setData(self):
-        self._table.setData()
+    @Slot(str, result=None)
+    def setTable(self, table: str):
+        self._table.setTable(table)
 
     @Slot(str, result=str)
     def sayHello(self, val: str) -> str:

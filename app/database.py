@@ -15,13 +15,13 @@ class Database:
     def close(self) -> None:
         self.conn.close()
 
-    def fetch(self) -> list:
+    def fetch(self, table: str) -> list:
         with self.conn.cursor() as cursor:
-            return cursor.execute("SELECT * FROM emp").fetchall()
+            return cursor.execute(f"SELECT * FROM {table}").fetchall()
 
-    def fetchOther(self) -> list:
-        with self.conn.cursor() as cursor:
-            return cursor.execute("SELECT * FROM client").fetchall()
+    # def fetchOther(self) -> list:
+    #     with self.conn.cursor() as cursor:
+    #         return cursor.execute("SELECT * FROM client").fetchall()
 
     def execute(self) -> None:
         with self.conn.cursor() as cursor:
