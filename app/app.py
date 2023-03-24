@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 def setup():
+    # sys.argv += ["--style", "material"]
     app = QGuiApplication(sys.argv)
 
     db = d.Database()

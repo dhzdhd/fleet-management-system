@@ -11,7 +11,7 @@ Item {
     Rectangle {
         id: mainContainer
         anchors.fill: parent
-        color: '#ff282a37'
+        color: "black"
 
         GridLayout {
             anchors.fill: parent

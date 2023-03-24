@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick.Controls.Universal
 
 Item {
     property bool isPrimary: false
@@ -11,32 +11,34 @@ Item {
     implicitHeight: 50
     implicitWidth: 50
 
-    // anchors {
-    //     leftMargin: 20
-    //     rightMargin: 20
-    // }
-
     Button {
         id: btn
         anchors.fill: parent
 
-        palette {
-            buttonText: "white"
-        }
+        // palette {
+        //     buttonText: "white"
+        // }
 
         font {
             pointSize: 16
-            weight: Font.DemiBold
+            // weight: Font.DemiBold
         }
+
+        highlighted: isPrimary
+
+        // Universal.accent: Universal.Teal
+        // Universal.background: Universal.Teal
+        // Universal.foreground: Universal.color("white")
 
         onClicked: item.clicked()
 
-        background: Rectangle {
-            anchors.fill: parent
-            color: item.isPrimary
-                ? (parent.hovered ? "#ff1966ab": "#ff2185de")
-                : (parent.hovered ? "#ff282b37": "#ff323644")
-            radius: btn.height / 2
-        }
+        // background: Rectangle {
+        //     anchors.fill: parent
+        //     // Universal.background: Universal.Teal
+        //     // item.isPrimary
+        //         // ? (parent.hovered ? Universal.Teal: "#ff2185de")
+        //         // : (parent.hovered ? "#ff282b37": "#ff323644")
+        //     radius: btn.height / 2
+        // }
     }
 }

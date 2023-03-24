@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Universal
 import QtQuick.Layouts
 import "../components" as Components
 import Qt.labs.qmlmodels
@@ -9,7 +10,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: "#ff282a37"
+        color: "black"
 
         ColumnLayout {
             anchors.fill: parent
@@ -19,12 +20,19 @@ Item {
             RowLayout {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
+                height: 70
 
                 ComboBox {
                     Layout.fillWidth: true
                     model: ["emp", "client", "work_exp", "prj_details", "emp_skill"]
+                    padding: 0
+                    height: 70
                     onActivated: (index) => {
                         bridge.setTable(textAt(index))
+                    }
+
+                    font {
+                        pixelSize: 16
                     }
                 }
             }
@@ -34,8 +42,8 @@ Item {
                 height: table.height
                 width: table.width
                 clip: true
-                columnSpacing: 1
-                rowSpacing: 1
+                columnSpacing: 0
+                rowSpacing: 0
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -43,9 +51,6 @@ Item {
 
                 ScrollIndicator.horizontal: ScrollIndicator { }
                 ScrollIndicator.vertical: ScrollIndicator { }
-
-                // Layout.alignment: Qt.AlignVCenter
-                // anchors.fill: parent
 
                 // model: TableModel {
                 //     TableModelColumn { display: "name" }
@@ -56,36 +61,42 @@ Item {
                 //         }
                 //     ]
                 // }
+
                 model: tableModel
 
                 selectionModel: ItemSelectionModel {}
 
                 delegate: Rectangle {
-                    implicitWidth: text.width + 50
-                    implicitHeight: 50
+                    implicitWidth: 150
+                    implicitHeight: 70
+                    clip: true
 
                     required property bool selected
                     required property bool current
 
-                    color: current ? "#ff1966ab": "#ff282a37"
+                    color: current ? Universal.color(Universal.Cobalt): "black"
+
+                    border {
+                        width: 1
+                        color: Universal.color(Universal.Cobalt)
+                    }
 
                     RowLayout {
+                        anchors.fill: parent
                         Text {
                             id: text
-                            Layout.alignment: Qt.AlignHCenter
+                            // Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+
+                            font {
+                                pixelSize: 16
+                            }
 
                             color: "white"
                             text: display
-                        }
-
-                        Button {
-                            Layout.alignment: Qt.AlignHCenter
-                            height: 20
-                            width: 20
-                            onClicked: {
-                                // bridge.setData()
-                                console.log(tableview.currentColumn)
-                            }
                         }
                     }
                 }

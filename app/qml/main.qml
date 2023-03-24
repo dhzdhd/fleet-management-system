@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
-import "components" as Components
+import QtQuick.Controls.Universal
 import "views" as Views
 
 ApplicationWindow {
@@ -11,6 +10,11 @@ ApplicationWindow {
     title: "Fleet Management System"
 
     property QtObject bridge
+
+    Universal.theme: Universal.Dark
+    Universal.accent: Universal.Cobalt
+    Universal.background: "black"
+    Universal.foreground: "white"
 
     Connections {
         target: bridge
