@@ -43,7 +43,9 @@ class TableModel(QAbstractTableModel):
 
     def setTable(self, table: str):
         self.beginResetModel()
-        self._data = self._db.fetch(table)
+        buffer = [self._db.fetch_headers(table)]
+        buffer.extend(self._db.fetch(table))
+        self._data = buffer
         self.endResetModel()
 
 
@@ -64,6 +66,10 @@ class Bridge(QObject):
         print(val)
         self.updated.emit("hello world!")
         return "bro"
+
+    @Slot(str, str, result=bool)
+    def validate(self, username: str, password: str) -> bool:
+        return username == "a" and password == "b"
 
     @Slot(None, result=None)
     def quit(self) -> None:

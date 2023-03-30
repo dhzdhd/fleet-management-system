@@ -64,8 +64,10 @@ Item {
                     isPrimary: true
                     text: "Submit"
                     onClicked: {
-                        stackRef.pop()
-                        stackRef.push(pushId)
+                        if (bridge.validate(usernameField.text, passwordField.text)) {
+                            stackRef.pop()
+                            stackRef.push(pushId)
+                        }
                     }
                 }
                 Components.Button {

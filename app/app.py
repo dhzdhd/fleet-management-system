@@ -12,7 +12,7 @@ def setup():
     app = QGuiApplication(sys.argv)
 
     db = d.Database()
-    db.execute()
+    db.run_migration()
 
     engine = QQmlApplicationEngine()
     engine.quit.connect(app.quit)
