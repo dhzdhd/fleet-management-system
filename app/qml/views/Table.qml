@@ -87,7 +87,7 @@ Item {
 
                         Loader {
                             anchors.fill: parent
-                            sourceComponent: row == 1 ? buttonComponent: textComponent
+                            sourceComponent: display == "-" ? buttonComponent: textComponent
                         }
 
                         Component {
@@ -95,6 +95,10 @@ Item {
 
                             Button {
                                 anchors.fill: parent
+
+                                onClicked: {
+                                    editDialog.open()
+                                }
 
                                 Text {
                                     id: text
@@ -106,7 +110,8 @@ Item {
                                         pixelSize: 16
                                     }
 
-                                    text: "eifghjeihgfo"
+                                    text: "📝"
+                                    color: "white"
                                 }
                             }
                         }

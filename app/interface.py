@@ -8,14 +8,12 @@ class TableModel(QAbstractTableModel):
     def __init__(self, db: d.Database, parent: QObject | None = None) -> None:
         super().__init__(parent=parent)
         self._db = db
-        buffer = [db.fetch_headers("emp")]
-        buffer.extend(db.fetch("emp"))
-        self._data = {"data": buffer}
+        self._data = self.prepareData("emp")
 
     def headerData(
         self,
         section: int,
-        orientation: Qt.Orientation = Qt.Orientation.Horizontal,
+        _: Qt.Orientation = Qt.Orientation.Horizontal,
         role: int = Qt.DisplayRole,
     ):
         if role == Qt.DisplayRole:
@@ -26,27 +24,22 @@ class TableModel(QAbstractTableModel):
         self, index: QModelIndex | QPersistentModelIndex, role: int = Qt.DisplayRole
     ):
         if role == Qt.DisplayRole:
-            return self._data["data"][index.row()][index.column()]
+            return self._data[index.row()][index.column()]
 
-    def rowCount(self, parent: QModelIndex | QPersistentModelIndex = None) -> int:
-        return len(self._data["data"])
+    def rowCount(self, _: QModelIndex | QPersistentModelIndex = None) -> int:
+        return len(self._data)
 
-    def columnCount(self, parent: QModelIndex | QPersistentModelIndex = None) -> int:
-        return len(self._data["data"][0])
+    def columnCount(self, _: QModelIndex | QPersistentModelIndex = None) -> int:
+        return len(self._data[0])
 
-    def insertRows(
-        self, row: int, count: int, parent: QModelIndex | QPersistentModelIndex = None
-    ) -> bool:
-        super().beginInsertRows(parent, row, count)
-        print("hi")
-        super().endInsertRows()
-        return super().insertRows(row, count, parent)
+    def prepareData(self, table: str) -> list[list[str]]:
+        headers = [" ", *self._db.fetch_headers(table)]
+        data = list(map(lambda x: ["-", *x], self._db.fetch(table)))
+        return [headers, *data]
 
     def setTable(self, table: str):
         self.beginResetModel()
-        buffer = [self._db.fetch_headers(table)]
-        buffer.extend(self._db.fetch(table))
-        self._data = {"data": buffer}
+        self._data = self.prepareData(table)
         self.endResetModel()
 
 

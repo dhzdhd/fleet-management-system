@@ -39,18 +39,18 @@ class Database:
     def close(self) -> None:
         self.conn.close()
 
-    def fetch(self, table: str) -> list:
+    def fetch(self, table: str) -> list[list[str]]:
         with self.conn.cursor() as cursor:
             rows = cursor.execute(f"SELECT * FROM {table}").fetchall()
             rows = list(map(lambda t: tuple(map(lambda x: Utils.convert(x), t)), rows))
-            return rows
+            return [list(i) for i in rows]
 
-    def fetch_headers(self, table: str) -> list:
+    def fetch_headers(self, table: str) -> list[list[str]]:
         with self.conn.cursor() as cursor:
             rows = cursor.execute(
                 f"SELECT column_name FROM USER_TAB_COLUMNS WHERE table_name='{table.upper()}'"
             ).fetchall()
-            return tuple([i[0] for i in rows])
+            return list([i[0] for i in rows])
 
     def execute(self) -> None:
         with self.conn.cursor() as cursor:
