@@ -43,7 +43,7 @@ Item {
                 Layout.alignment: Qt.AlignBottom
 
                 TableView {
-                    id: tableview
+                    id: tv
                     height: table.height
                     width: table.width
                     clip: true
@@ -69,7 +69,7 @@ Item {
 
                     model: tableModel
 
-                    selectionModel: ItemSelectionModel {}
+                    // selectionModel: ItemSelectionModel {}
 
                     delegate: Rectangle {
                         implicitWidth: 150
@@ -78,28 +78,58 @@ Item {
                         required property bool selected
                         required property bool current
 
-                        color: current ? Universal.color(Universal.Cobalt): "black"
+                        color: row == 0 ? Universal.color(Universal.Cobalt): "black"
 
                         border {
                             width: 1
-                            color: Universal.color(Universal.Cobalt)
+                            color: row == 0 ? "black" : Universal.color(Universal.Cobalt)
                         }
 
-                        RowLayout {
+                        Loader {
                             anchors.fill: parent
+                            sourceComponent: row == 1 ? buttonComponent: textComponent
+                        }
 
-                            Text {
-                                id: text
-                                Layout.fillWidth: true
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
+                        Component {
+                            id: buttonComponent
 
-                                font {
-                                    pixelSize: 16
+                            Button {
+                                anchors.fill: parent
+
+                                Text {
+                                    id: text
+                                    anchors.fill: parent
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+
+                                    font {
+                                        pixelSize: 16
+                                    }
+
+                                    text: "eifghjeihgfo"
                                 }
+                            }
+                        }
 
-                                color: "white"
-                                text: display
+                        Component {
+                            id: textComponent
+
+                            RowLayout {
+                                anchors.fill: parent
+
+                                Text {
+                                    id: text
+                                    Layout.fillWidth: true
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+
+                                    font {
+                                        pixelSize: 16
+                                    }
+
+                                    color: "white"
+                                    text: display
+                                }
                             }
                         }
                     }

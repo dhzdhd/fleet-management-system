@@ -48,7 +48,7 @@ class Database:
     def fetch_headers(self, table: str) -> list:
         with self.conn.cursor() as cursor:
             rows = cursor.execute(
-                f"SELECT column_name FROM ALL_TAB_COLUMNS WHERE table_name='{table.upper()}'"
+                f"SELECT column_name FROM USER_TAB_COLUMNS WHERE table_name='{table.upper()}'"
             ).fetchall()
             return tuple([i[0] for i in rows])
 

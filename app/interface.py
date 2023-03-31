@@ -7,8 +7,10 @@ from . import database as d
 class TableModel(QAbstractTableModel):
     def __init__(self, db: d.Database, parent: QObject | None = None) -> None:
         super().__init__(parent=parent)
-        self._data = db.fetch("emp")
         self._db = db
+        buffer = [db.fetch_headers("emp")]
+        buffer.extend(db.fetch("emp"))
+        self._data = {"data": buffer}
 
     def headerData(
         self,
@@ -24,14 +26,13 @@ class TableModel(QAbstractTableModel):
         self, index: QModelIndex | QPersistentModelIndex, role: int = Qt.DisplayRole
     ):
         if role == Qt.DisplayRole:
-            return self._data[index.row()][index.column()]
-        return 0
+            return self._data["data"][index.row()][index.column()]
 
     def rowCount(self, parent: QModelIndex | QPersistentModelIndex = None) -> int:
-        return len(self._data)
+        return len(self._data["data"])
 
     def columnCount(self, parent: QModelIndex | QPersistentModelIndex = None) -> int:
-        return len(self._data[0])
+        return len(self._data["data"][0])
 
     def insertRows(
         self, row: int, count: int, parent: QModelIndex | QPersistentModelIndex = None
@@ -45,7 +46,7 @@ class TableModel(QAbstractTableModel):
         self.beginResetModel()
         buffer = [self._db.fetch_headers(table)]
         buffer.extend(self._db.fetch(table))
-        self._data = buffer
+        self._data = {"data": buffer}
         self.endResetModel()
 
 
