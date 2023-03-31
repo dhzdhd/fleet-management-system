@@ -4,6 +4,7 @@ import QtQuick.Controls.Universal
 import "views" as Views
 
 ApplicationWindow {
+    id: root
     visible: true
     width: 600
     height: 500

@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Controls.Universal
 import QtQuick.Layouts
 import "../components" as Components
+import "./dialogs"
 import Qt.labs.qmlmodels
 
 Item {
@@ -57,16 +58,6 @@ Item {
                     ScrollIndicator.horizontal: ScrollIndicator { }
                     ScrollIndicator.vertical: ScrollIndicator { }
 
-                    // model: TableModel {
-                    //     TableModelColumn { display: "name" }
-
-                    //     rows: [
-                    //         {
-                    //             name: "a"
-                    //         }
-                    //     ]
-                    // }
-
                     model: tableModel
 
                     // selectionModel: ItemSelectionModel {}
@@ -88,6 +79,14 @@ Item {
                         Loader {
                             anchors.fill: parent
                             sourceComponent: display == "-" ? buttonComponent: textComponent
+                        }
+
+                        Dialog {
+                            id: editDialog
+
+                            anchors.centerIn: parent
+
+                            title: row.toString()
                         }
 
                         Component {
