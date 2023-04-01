@@ -11,6 +11,7 @@ ApplicationWindow {
     title: "Fleet Management System"
 
     property QtObject bridge
+    property int currentRow: 0
 
     Universal.theme: Universal.Dark
     Universal.accent: Universal.Cobalt
@@ -20,8 +21,8 @@ ApplicationWindow {
     Connections {
         target: bridge
 
-        function onUpdated(msg) {
-            console.log(msg)
+        function onCurrentRowChanged(currentRow) {
+            root.currentRow = currentRow
         }
     }
 
@@ -33,6 +34,13 @@ ApplicationWindow {
 
     Views.Table {
         id: table
+
+        Dialog {
+            id: editDialog
+            anchors.centerIn: parent
+            title: currentRow
+            standardButtons: Dialog.Ok | Dialog.Cancel
+        }
     }
 
     Views.Login {

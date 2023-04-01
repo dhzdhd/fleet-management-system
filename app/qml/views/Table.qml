@@ -81,14 +81,6 @@ Item {
                             sourceComponent: display == "-" ? buttonComponent: textComponent
                         }
 
-                        Dialog {
-                            id: editDialog
-
-                            anchors.centerIn: parent
-
-                            title: row.toString()
-                        }
-
                         Component {
                             id: buttonComponent
 
@@ -96,6 +88,7 @@ Item {
                                 anchors.fill: parent
 
                                 onClicked: {
+                                    bridge.updateCurrentRow(row)
                                     editDialog.open()
                                 }
 

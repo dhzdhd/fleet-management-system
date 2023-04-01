@@ -1,16 +1,6 @@
 import oracledb as odb
 import oracledb.exceptions as odbe
-from datetime import datetime
-
-
-class Utils:
-    @staticmethod
-    def convert(x: str | datetime | None) -> str:
-        if type(x) == datetime:
-            return x.strftime(r"%d/%m/%Y")
-        elif x is None:
-            return "NULL"
-        return x
+from .utils import Utils
 
 
 class Database:
