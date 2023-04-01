@@ -1,5 +1,11 @@
 from PySide6.QtCore import QObject, Qt, QModelIndex, QPersistentModelIndex
-from PySide6.QtCore import Slot, Signal, QAbstractTableModel, QAbstractListModel
+from PySide6.QtCore import (
+    Slot,
+    Signal,
+    QAbstractTableModel,
+    QAbstractListModel,
+    QByteArray,
+)
 import sys
 from . import database as d
 from .utils import Utils
@@ -54,8 +60,25 @@ class TableModel(QAbstractTableModel):
         self.endResetModel()
 
 
-class EditListModel(QAbstractListModel):
-    ...
+class ListModel(QAbstractListModel):
+    DataRole = Qt.UserRole + 1
+
+    def __init__(self, db: d.Database, parent: QObject | None = None) -> None:
+        super().__init__(parent=parent)
+        self._db = db
+        self._data = [{"listData": 1}, {"listData": 2}]
+
+    def rowCount(self, parent: QModelIndex | QPersistentModelIndex) -> int:
+        return len(self._data)
+
+    def data(self, index: QModelIndex, QPersistentModelIndex, role: int = ...):
+        if role == Qt.DisplayRole:
+            return self._data[index.row()].get("listData")
+
+    def roleNames(self) -> dict[int, QByteArray]:
+        return {
+            ListModel.DataRole: b"listData",
+        }
 
 
 class Bridge(QObject):

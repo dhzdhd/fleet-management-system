@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Universal
+import QtQuick.Layouts
+import "components" as Components
 import "views" as Views
 
 ApplicationWindow {
@@ -38,8 +40,46 @@ ApplicationWindow {
         Dialog {
             id: editDialog
             anchors.centerIn: parent
+
+            height: parent.height - 50
+            width: parent.width - 50
+
             title: currentRow
             standardButtons: Dialog.Ok | Dialog.Cancel
+
+            ListView {
+                property var listData
+
+                anchors.fill: parent
+                model: editListModel
+                spacing: 10
+                clip: true
+                delegate: RowLayout {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    height: 50
+
+                    Text {
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignLeft
+
+                        font {
+                            pixelSize: 16
+                        }
+                        color: "white"
+
+                        text: "listData"
+                    }
+
+                    Components.TextEdit {
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignRight
+                        placeholderText: "listData"
+                    }
+                }
+            }
         }
     }
 
