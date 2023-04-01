@@ -1,5 +1,5 @@
 from PySide6.QtCore import QObject, Qt, QModelIndex, QPersistentModelIndex
-from PySide6.QtCore import Slot, Signal, QAbstractTableModel
+from PySide6.QtCore import Slot, Signal, QAbstractTableModel, QAbstractListModel
 import sys
 from . import database as d
 from .utils import Utils
@@ -54,6 +54,10 @@ class TableModel(QAbstractTableModel):
         self.endResetModel()
 
 
+class EditListModel(QAbstractListModel):
+    ...
+
+
 class Bridge(QObject):
     currentRowChanged = Signal(int)
 
@@ -75,7 +79,7 @@ class Bridge(QObject):
 
     @Slot(str, str, result=bool)
     def validate(self, username: str, password: str) -> bool:
-        return username == "a" and password == "b"
+        return username == "a" and password == "b"  # ! Make env file
 
     @Slot(int, result=None)
     def updateCurrentRow(self, row: int) -> None:
