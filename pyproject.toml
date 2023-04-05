@@ -9,6 +9,7 @@ readme = "README.md"
 python = ">=3.11,<3.12"
 oracledb = "^1.2.2"
 pyside6 = "^6.4.2"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]

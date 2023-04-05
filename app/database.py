@@ -1,17 +1,26 @@
 import oracledb as odb
 import oracledb.exceptions as odbe
 from .utils import Utils
+from dotenv import load_dotenv
+from os import getenv
 
 
 class Database:
     def __init__(self) -> None:
         # Run lsnrctl status to get values
+        load_dotenv()
+
+        user = getenv("USER")
+        password = getenv("PASSWORD")
+        host = getenv("HOST")
+        service_name = getenv("SERVICE_NAME")
+
         self.conn: odb.Connection = odb.connect(
-            user="system",
-            password="lolxd5",
+            user=user if user is not None else "system",
+            password=password if password is not None else "lolxd5",
             port=1521,
-            host="localhost",
-            service_name="deep",
+            host=host if host is not None else "localhost",
+            service_name=service_name if service_name is not None else "deep",
         )
 
     def run_migration(self) -> None:
